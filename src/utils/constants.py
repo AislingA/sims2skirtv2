@@ -13,6 +13,8 @@ MSUN_PC2_TO_G_CM2 = MSUN_TO_G / (PC_TO_CM ** 2)
 MSUN_AU3_TO_G_CM3 = MSUN_TO_G / (AU_TO_CM ** 3)
 # (Msun / PC^3) -> (g / cm^3)
 MSUN_PC3_TO_G_CM3 = MSUN_TO_G / (PC_TO_CM ** 3)
+# AU -> PC
+AU_TO_PC = AU_TO_CM / PC_TO_CM
 
 # Jansky to CGS specific flux density (erg/s/cm^2/Hz)
 JY_TO_CGS = 1e-23

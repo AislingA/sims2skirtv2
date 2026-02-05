@@ -4,7 +4,7 @@
 <!-- -------------- -->
 <!-- SIMULATIONMODE -->
 <!-- -------------- -->
-    <MonteCarloSimulation userLevel="Expert" simulationMode="DustEmission" iteratePrimaryEmission="false" iterateSecondaryEmission="true" numPackets="1e7">
+    <MonteCarloSimulation userLevel="USERLEVEL" simulationMode="SIMULATIONMODE" iteratePrimaryEmission="ITERATE_PRIMARY" iterateSecondaryEmission="ITERATE_SECONDARY" numPackets="NUMPACKETS">
         <random type="Random">
             <Random seed="0"/>
         </random>
@@ -53,7 +53,7 @@
 <!-- DUSTEMISSIONOPTIONS -->
 <!-- ------------------- -->
                 <dustEmissionOptions type="DustEmissionOptions">
-                    <DustEmissionOptions dustEmissionType="Equilibrium" includeHeatingByCMB="true" maxFractionOfPrimary="0.01" maxFractionOfPrevious="0.01" sourceWeight="1" wavelengthBias="0.5">
+                    <DustEmissionOptions dustEmissionType="Stochastic" includeHeatingByCMB="true" maxFractionOfPrimary="0.01" maxFractionOfPrevious="0.03" sourceWeight="1" wavelengthBias="0.5">
                         <cellLibrary type="SpatialCellLibrary">
                             <AllCellsLibrary/>
                         </cellLibrary>
@@ -89,7 +89,7 @@
                 <grid type="SpatialGrid">
                     <PolicyTreeSpatialGrid minX="XMIN" maxX="XMAX" minY="YMIN" maxY="YMAX" minZ="ZMIN" maxZ="ZMAX" treeType="OctTree">
                         <policy type="TreePolicy">
-                            <DensityTreePolicy minLevel="6" maxLevel="12" maxDustFraction="1e-6" maxDustOpticalDepth="0" maxDustDensityDispersion="0" maxElectronFraction="1e-6" maxGasFraction="1e-6"/>
+                            <DensityTreePolicy minLevel="MINLEVEL" maxLevel="MAXLEVEL" maxDustFraction="1e-6" maxDustOpticalDepth="0" maxDustDensityDispersion="0" maxElectronFraction="1e-6" maxGasFraction="1e-6"/>
                         </policy>
                     </PolicyTreeSpatialGrid>
                 </grid>
@@ -104,26 +104,163 @@
 <!-- ---- -->
 <!-- SPEC -->
 <!-- ---- -->                
-                    <FullInstrument instrumentName="spec" distance="1 kpc" inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                    <FullInstrument instrumentName="logwaves" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="AZIMUTH" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
                         <wavelengthGrid type="WavelengthGrid">
                             <LogWavelengthGrid minWavelength="0.09 micron" maxWavelength="1000 micron" numWavelengths="150"/>
+                        </wavelengthGrid>
+                    </FullInstrument>
+<!-- ------------ -->
+<!-- PANCHROMATIC -->
+<!-- ------------ -->
+                    <FullInstrument instrumentName="panchromatic" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="true" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                        <wavelengthGrid type="WavelengthGrid">
+                            <ConfigurableBandWavelengthGrid>
+                                <bands type="Band">
+                                    <BroadBand bandName="GALEX_GALEX_FUV"/>
+                                    <BroadBand bandName="GALEX_GALEX_NUV"/>
+                                    <BroadBand bandName="SLOAN_SDSS_U"/>
+                                    <BroadBand bandName="SLOAN_SDSS_G"/>
+                                    <BroadBand bandName="SLOAN_SDSS_R"/>
+                                    <BroadBand bandName="SLOAN_SDSS_I"/>
+                                    <BroadBand bandName="SLOAN_SDSS_Z"/>
+                                    <BroadBand bandName="2MASS_2MASS_J"/>
+                                    <BroadBand bandName="2MASS_2MASS_H"/>
+                                    <BroadBand bandName="2MASS_2MASS_KS"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I1"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I2"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I3"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I4"/>
+                                    <BroadBand bandName="WISE_WISE_W3"/>
+                                    <BroadBand bandName="SPITZER_MIPS_24"/>
+                                    <BroadBand bandName="HERSCHEL_PACS_70"/>
+                                    <BroadBand bandName="HERSCHEL_PACS_100"/>
+                                    <BroadBand bandName="HERSCHEL_PACS_160"/>
+                                    <BroadBand bandName="HERSCHEL_SPIRE_250"/>
+                                    <BroadBand bandName="HERSCHEL_SPIRE_350"/>
+                                    <BroadBand bandName="HERSCHEL_SPIRE_500"/>
+                                    <BroadBand bandName="JCMT_SCUBA2_850"/>
+                                    <BroadBand bandName="ALMA_ALMA_6"/>
+                                    <BroadBand bandName="ALMA_ALMA_3"/>
+                                    <BroadBand bandName="PLANCK_LFI_30"/>
+                                </bands>
+                            </ConfigurableBandWavelengthGrid>
+                        </wavelengthGrid>
+                    </FullInstrument>
+<!-- ------------ -->
+<!-- PANCHROMATIC -->
+<!-- ------------ -->
+                    <FullInstrument instrumentName="full" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="true" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                        <wavelengthGrid type="WavelengthGrid">
+                            <ConfigurableBandWavelengthGrid>
+                                <bands type="Band">
+                                    <BroadBand bandName="JWST_NIRCAM_F070W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F090W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F115W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F140M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F150W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F162M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F164N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F150W2"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F182M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F187N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F200W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F210M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F212N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F250M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F277W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F300M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F322W2"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F323N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F335M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F356W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F360M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F405N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F410M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F430M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F444W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F460M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F466N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F470N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F480M"/>
+                                    <BroadBand bandName="JWST_MIRI_F560W"/>
+                                    <BroadBand bandName="JWST_MIRI_F770W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1000W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1130W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1280W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1500W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1800W"/>
+                                    <BroadBand bandName="JWST_MIRI_F2100W"/>
+                                    <BroadBand bandName="JWST_MIRI_F2550W"/>
+                                    <BroadBand bandName="ALMA_ALMA_10"/>
+                                    <BroadBand bandName="ALMA_ALMA_9"/>
+                                    <BroadBand bandName="ALMA_ALMA_8"/>
+                                    <BroadBand bandName="ALMA_ALMA_7"/>
+                                    <BroadBand bandName="ALMA_ALMA_6"/>
+                                    <BroadBand bandName="ALMA_ALMA_5"/>
+                                    <BroadBand bandName="ALMA_ALMA_4"/>
+                                    <BroadBand bandName="ALMA_ALMA_3"/>
+                                    <BroadBand bandName="RUBIN_LSST_U"/>
+                                    <BroadBand bandName="RUBIN_LSST_G"/>
+                                    <BroadBand bandName="RUBIN_LSST_R"/>
+                                    <BroadBand bandName="RUBIN_LSST_I"/>
+                                    <BroadBand bandName="RUBIN_LSST_Z"/>
+                                    <BroadBand bandName="RUBIN_LSST_Y"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I1"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I2"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I3"/>
+                                    <BroadBand bandName="SPITZER_IRAC_I4"/>
+                                    <BroadBand bandName="SPITZER_MIPS_24"/>
+                                    <BroadBand bandName="SPITZER_MIPS_70"/>
+                                    <BroadBand bandName="SPITZER_MIPS_160"/>
+                                </bands>
+                            </ConfigurableBandWavelengthGrid>
                         </wavelengthGrid>
                     </FullInstrument>
 <!-- ---- -->
 <!-- JWST -->
 <!-- ---- -->
-                    <FullInstrument instrumentName="jwst" distance="1 kpc" inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                    <FullInstrument instrumentName="jwst" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
                         <wavelengthGrid type="WavelengthGrid">
                             <ConfigurableBandWavelengthGrid>
                                 <bands type="Band">
+                                    <BroadBand bandName="JWST_NIRCAM_F070W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F090W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F115W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F140M"/>
                                     <BroadBand bandName="JWST_NIRCAM_F150W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F162M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F164N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F150W2"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F182M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F187N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F200W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F210M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F212N"/>
                                     <BroadBand bandName="JWST_NIRCAM_F250M"/>
                                     <BroadBand bandName="JWST_NIRCAM_F277W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F300M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F322W2"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F323N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F335M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F356W"/>
                                     <BroadBand bandName="JWST_NIRCAM_F360M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F405N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F410M"/>
                                     <BroadBand bandName="JWST_NIRCAM_F430M"/>
                                     <BroadBand bandName="JWST_NIRCAM_F444W"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F460M"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F466N"/>
+                                    <BroadBand bandName="JWST_NIRCAM_F470N"/>
                                     <BroadBand bandName="JWST_NIRCAM_F480M"/>
+                                    <BroadBand bandName="JWST_MIRI_F560W"/>
+                                    <BroadBand bandName="JWST_MIRI_F770W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1000W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1130W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1280W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1500W"/>
+                                    <BroadBand bandName="JWST_MIRI_F1800W"/>
                                     <BroadBand bandName="JWST_MIRI_F2100W"/>
+                                    <BroadBand bandName="JWST_MIRI_F2550W"/>
                                 </bands>
                             </ConfigurableBandWavelengthGrid>
                         </wavelengthGrid>
@@ -131,12 +268,16 @@
 <!-- ---- -->
 <!-- ALMA -->
 <!-- ---- -->
-                    <FullInstrument instrumentName="alma" distance="1 kpc" inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                    <FullInstrument instrumentName="alma" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
                         <wavelengthGrid type="WavelengthGrid">
                             <ConfigurableBandWavelengthGrid>
                                 <bands type="Band">
+                                    <BroadBand bandName="ALMA_ALMA_10"/>
+                                    <BroadBand bandName="ALMA_ALMA_9"/>
+                                    <BroadBand bandName="ALMA_ALMA_8"/>
                                     <BroadBand bandName="ALMA_ALMA_7"/>
                                     <BroadBand bandName="ALMA_ALMA_6"/>
+                                    <BroadBand bandName="ALMA_ALMA_5"/>
                                     <BroadBand bandName="ALMA_ALMA_4"/>
                                     <BroadBand bandName="ALMA_ALMA_3"/>
                                 </bands>
@@ -146,7 +287,7 @@
 <!-- ----- -->
 <!-- RUBIN -->
 <!-- ----- -->
-                    <FullInstrument instrumentName="rubin" distance="1 kpc" inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                    <FullInstrument instrumentName="rubin" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
                         <wavelengthGrid type="WavelengthGrid">
                             <ConfigurableBandWavelengthGrid>
                                 <bands type="Band">
@@ -163,7 +304,7 @@
 <!-- ------- -->
 <!-- SPITZER -->
 <!-- ------- -->
-                    <FullInstrument instrumentName="spitzer" distance="1 kpc" inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
+                    <FullInstrument instrumentName="spitzer" distance="DISTANCE" inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc" recordComponents="True" numScatteringLevels="0" recordPolarization="false" recordStatistics="false">
                         <wavelengthGrid type="WavelengthGrid">
                             <ConfigurableBandWavelengthGrid>
                                 <bands type="Band">
@@ -192,43 +333,43 @@
 <!-- ------------------------------- -->
                     <ImportedMediumDensityProbe probeName="mediumdensityprobe">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedMediumDensityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedMediumMetallicityProbe probeName="mediummetallicityprobe">
                         <form type="GenericForm">
-                            <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                            <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedMediumMetallicityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedMediumTemperatureProbe probeName="mediumtemperatureprobe">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedMediumTemperatureProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedMediumVelocityProbe probeName="mediumvelocityprobe">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedMediumVelocityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedSourceDensityProbe probeName="sourcedensityprobe" massType="InitialMass">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedSourceDensityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedSourceAgeProbe probeName="sourceageprobe" weight="InitialMass">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedSourceAgeProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedSourceLuminosityProbe probeName="sourceluminosityprobe" convolve="false">
                         <form type="GenericForm">
-                            <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                            <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                         <wavelengthGrid type="WavelengthGrid">
                             <LogWavelengthGrid minWavelength="0.09 micron" maxWavelength="1000 micron" numWavelengths="150"/>
@@ -237,13 +378,13 @@
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedSourceMetallicityProbe probeName="sourcemetallicityprobe" weight="InitialMass">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedSourceMetallicityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <ImportedSourceVelocityProbe probeName="sourcevelocityprobe" weight="InitialMass">
                         <form type="GenericForm">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </ImportedSourceVelocityProbe>
 <!----------------------------------------------------------------------------------------------------------->
@@ -273,31 +414,31 @@
 <!-- ---------------------------------------- -->
                     <DensityProbe probeName="densityprobe" aggregation="Type" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </DensityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <CustomStateProbe probeName="customstateprobe" indicies="" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </CustomStateProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <MetallicityProbe probeName="metallicityprobe" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </MetallicityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <VelocityProbe probeName="velocityprobe">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </VelocityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <MagneticFieldProbe probeName="magneticfieldprobe">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </MagneticFieldProbe>
 <!----------------------------------------------------------------------------------------------------------->
@@ -306,7 +447,7 @@
 <!----------------------------------------------------------------------------------------------------------->
                     <OpacityProbe probeName="opacityprobe" aggregation="Type" probeAfter="Run">
                         <form type="Form">
-                            <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                            <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </OpacityProbe>
 <!----------------------------------------------------------------------------------------------------------->
@@ -345,13 +486,13 @@
 <!-- ------------------------------------------------- -->
                     <RadiationFieldProbe probeName="radiationfieldprobe" writeWavelengthGrid="True" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </RadiationFieldProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <TemperatureProbe probeName="temperatureprobe" aggregation="Type" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </TemperatureProbe>
 <!----------------------------------------------------------------------------------------------------------->
@@ -360,13 +501,13 @@
 <!----------------------------------------------------------------------------------------------------------->
                     <SecondaryDustLuminosityProbe probeName="secdustluminosityprobe" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </SecondaryDustLuminosityProbe>
 <!----------------------------------------------------------------------------------------------------------->
                     <SecondaryLineLuminosityProbe probeName="seclineluminosityprobe" probeAfter="Run">
                         <form type="Form">
-                          <ParallelProjectionForm inclination="90 deg" azimuth="0 deg" roll="0 deg" fieldOfViewX="FOVX" numPixelsX="800" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="800" centerY="0 pc"/>
+                          <ParallelProjectionForm inclination="INCLINATION" azimuth="AZIMUTH" roll="ROLL" fieldOfViewX="FOVX" numPixelsX="NUMPIXELSX" centerX="0 pc" fieldOfViewY="FOVY" numPixelsY="NUMPIXELSY" centerY="0 pc"/>
                         </form>
                     </SecondaryLineLuminosityProbe>
 <!----------------------------------------------------------------------------------------------------------->

@@ -17,7 +17,7 @@ from file_io.loader import load_snapshot, get_header_data, get_particle_data, fi
 from file_io.transform import finalize_dataset
 from utils.constants import MSUN_PC2_TO_G_CM2
 
-def plot_gas_surface_density(gas_data, bounds, resolution=800, save_path=None):
+def plot_gas_surface_density(gas_data, bounds, resolution=800, save_path=None, use_pixels=False):
     """
     Creates a logarithmic column density map of the gas.
 
@@ -31,6 +31,8 @@ def plot_gas_surface_density(gas_data, bounds, resolution=800, save_path=None):
         Pixel resolution of the 2D grid, Default is 800.
     save_path: str, optional
         If provided, saves the figure to this path.
+    use_pixels: bool
+        If True, plots X and Y axes in pixels instead of physical units
     """
     print("Generating Gas Surface Density Map")
 
@@ -54,12 +56,22 @@ def plot_gas_surface_density(gas_data, bounds, resolution=800, save_path=None):
     sigma_gas = H.T / pixel_area
     sigma_gas_cgs = sigma_gas * MSUN_PC2_TO_G_CM2
 
+    # determining plot extent
+    if use_pixels:
+        extent = [0, resolution, 0, resolution]
+        xlabel = 'X [pixels]'
+        ylabel = 'Y [pixels]'
+    else:
+        extent=[xmin, xmax, ymin, ymax]
+        xlabel = 'X [pc]'
+        ylabel = 'Y [pc]'
+
     # plotting
     fig, ax = plt.subplots(figsize=(8,8))
-    im = ax.imshow(sigma_gas_cgs, origin='lower', extent=[xmin, xmax, ymin, ymax], cmap='inferno', norm=LogNorm(vmin=1e-4, vmax=np.max(sigma_gas_cgs)))
+    im = ax.imshow(sigma_gas_cgs, origin='lower', extent=extent, cmap='inferno', norm=LogNorm(vmin=1e-4, vmax=np.max(sigma_gas_cgs)))
     cbar = plt.colorbar(im, ax=ax, label=r'$\Sigma _{gas}$ [$G \ cm^{-2}$]')
-    ax.set_xlabel('X [cm]')
-    ax.set_ylabel('Y [cm]')
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
     ax.set_title('Gas Surface Density')
 
     if save_path:
@@ -211,7 +223,8 @@ def run_diagnostics(snapshot_path, percentage=1):
     # making plots
     plot_gas_surface_density(
         pt0, bounds,
-        save_path=os.path.join(plot_dir, f"{base_name}_surface_density.png")
+        save_path=os.path.join(plot_dir, f"{base_name}_surface_density.png"),
+        use_pixels=True
     )
 
     plot_temperature_slice(

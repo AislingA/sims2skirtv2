@@ -5,6 +5,8 @@
 # configuration modules. It finally triggers the SKIRT 9 execution and 
 # monitors the simulation's progress and runtime performance.
 
+# in src as root directory: python -m runner.run_sim
+
 # imports
 import time
 import os
@@ -12,7 +14,7 @@ import PTS9.simulation as sm
 from file_io.loader import load_snapshot, get_header_data, get_particle_data, filter_by_id
 from file_io.transform import finalize_dataset
 from processing.formatter import format_source_file, format_gas_file
-from config.writer import get_default_replacements, create_ski_file
+from config.writer import get_default_replacements, apply_yaml_replacements
 
 def run_pipeline(snapshot_path, percentage=1, verbose=True):
     """
@@ -58,11 +60,12 @@ def run_pipeline(snapshot_path, percentage=1, verbose=True):
 
         # 3. Configurations
         template_path = 'config/template.ski'
+        yaml_path = 'config/replacements.yaml'
         ski_output = snapshot_path.replace('.hdf5', '.ski')
 
         replacements = get_default_replacements(src_path, gas_path, bounds)
-        create_ski_file(template_path, ski_output, replacements)
-
+        apply_yaml_replacements(template_path, ski_output, replacements, yaml_path)
+        
         # 4. Executing
         print('--- Executing SKIRT Simulation ---')
         skirt = sm.Skirt()

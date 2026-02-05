@@ -1,0 +1,32 @@
+# replacements.yaml
+
+# --- Simulation Mode ---
+# The following controls the photon count and the type of physics iteration
+simulation_settings:
+    USERLEVEL: "Expert"
+    SIMULATIONMODE: "DustEmission"
+    ITERATE_PRIMARY: "false"
+    ITERATE_SECONDARY: "true"
+    NUMPACKETS: "1e7"
+
+# --- Spatial Grid ---
+# Controls the reolution of the Octree
+# A higher max_level = finer resolution but more memory/time
+grid_settings:
+    MINLEVEL: "6"
+    MAXLEVEL: "12"
+
+# --- Instrument / Camera Positions ---
+# Controls where the "camera" is placed relative to the center of the simulation
+# For inclination: 0 deg = face-on, 90 deg = edge-on
+instrument_settings:
+    DISTANCE: "1 kpc"
+    INCLINATION: "90 deg"
+    AZIMUTH: "0 deg"
+    ROLL: "0 deg"
+
+# --- Image Resolution ---
+# This pizel dimensions for all instruments (JWST, ALMA, etc)
+resolution_settings:
+    NUMPIXELSX: "800"
+    NUMPIXELSY: "800"
