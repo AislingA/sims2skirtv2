@@ -18,3 +18,12 @@ AU_TO_PC = AU_TO_CM / PC_TO_CM
 
 # Jansky to CGS specific flux density (erg/s/cm^2/Hz)
 JY_TO_CGS = 1e-23
+
+# planck constant [erg s]
+h = 6.626e-27
+
+# boltzmann constant [erg/K]
+k_b = 1.3807e-16
+
+# speed of light [cm/s]
+c = 2.9979e10

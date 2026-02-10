@@ -75,14 +75,15 @@ def plot_sed(file_path, instrument):
         plt.close()
 
 if __name__ == "__main__":
-    # spec instrument
-    # plot_sed('../src/snapshot_150_spec_sed.dat', 'spec')
-    # # jwst instrument
-    # plot_sed('../src/snapshot_150_jwst_sed.dat', 'jwst')
-    # # alma instrument
-    # plot_sed('../src/snapshot_150_alma_sed.dat', 'alma')
-    # # rubin instrument
-    # plot_sed('../src/snapshot_150_rubin_sed.dat', 'rubin')
-    # # spitzer instrument
-    # plot_sed('../src/snapshot_150_spitzer_sed.dat', 'spitzer')
+    #spec instrument
+    plot_sed('../src/snapshot_150_spec_sed.dat', 'spec')
+    # jwst instrument
+    plot_sed('../src/snapshot_150_jwst_sed.dat', 'jwst')
+    # alma instrument
+    plot_sed('../src/snapshot_150_alma_sed.dat', 'alma')
+    # rubin instrument
+    plot_sed('../src/snapshot_150_rubin_sed.dat', 'rubin')
+    # spitzer instrument
+    plot_sed('../src/snapshot_150_spitzer_sed.dat', 'spitzer')
     plot_sed('../src/snapshot_150_panchromatic_sed.dat', 'pan')
+    plot_sed('../src/snapshot_150_full_sed.dat', 'full')
